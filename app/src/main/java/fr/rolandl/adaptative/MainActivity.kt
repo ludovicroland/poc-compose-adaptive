@@ -12,15 +12,11 @@ import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffoldRole
 import androidx.compose.material3.adaptive.navigation.ThreePaneScaffoldNavigator
 import androidx.compose.material3.adaptive.navigation.rememberListDetailPaneScaffoldNavigator
 import androidx.compose.runtime.Composable
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import dagger.hilt.android.AndroidEntryPoint
 import fr.rolandl.adaptative.bo.Product
-import fr.rolandl.adaptative.detail.DetailScreen
 import fr.rolandl.adaptative.detail.DetailScreenWithProduct
 import fr.rolandl.adaptative.detailplaceholder.DetailPlaceHolderScreen
 import fr.rolandl.adaptative.list.ListScreen
-import fr.rolandl.adaptative.navigation.Screen
 import fr.rolandl.adaptative.ui.theme.POCAdaptativeTheme
 
 @AndroidEntryPoint
