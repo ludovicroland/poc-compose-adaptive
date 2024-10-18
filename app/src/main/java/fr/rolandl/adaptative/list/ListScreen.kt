@@ -16,13 +16,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import fr.rolandl.adaptative.bo.Product
 
 @Composable
 fun ListScreen(
   modifier: Modifier = Modifier,
   viewModel: ListViewModel = hiltViewModel(),
-  onProductClicked: (Product) -> Unit
+  onProductClicked: (Int) -> Unit
 ) {
   val items by viewModel.items.collectAsStateWithLifecycle()
   
@@ -43,7 +42,7 @@ fun ListScreen(
               .width(100.dp)
               .height(100.dp),
             onClick = {
-              onProductClicked(product)
+              onProductClicked(product.id)
             }
           ) {
             Text(
