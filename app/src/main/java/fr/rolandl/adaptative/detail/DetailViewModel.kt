@@ -1,16 +1,22 @@
 package fr.rolandl.adaptative.detail
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import fr.rolandl.adaptative.bo.Product
 import kotlinx.coroutines.flow.MutableStateFlow
-import javax.inject.Inject
 
-@HiltViewModel
-class DetailViewModel @Inject constructor(savedStateHandle: SavedStateHandle) : ViewModel() {
+@HiltViewModel(assistedFactory = DetailViewModel.Factory::class)
+class DetailViewModel @AssistedInject constructor(@Assisted productId: Int) : ViewModel() {
   
-  private val id = savedStateHandle.get<Int>("id") ?: 0
+  @AssistedFactory
+  interface Factory {
+    fun create(productId: Int): DetailViewModel
+  }
+  
+  private val id = productId
   
   val product = MutableStateFlow<Product?>(null)
   

@@ -10,9 +10,16 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
 fun DetailScreen(
+  productId: Int,
   modifier: Modifier = Modifier,
-  viewModel: DetailViewModel = hiltViewModel()
 ) {
+  val viewModel = hiltViewModel<DetailViewModel, DetailViewModel.Factory>(
+    key = productId.toString(),
+    creationCallback = {
+      it.create(productId)
+    }
+  )
+  
   val product by viewModel.product.collectAsStateWithLifecycle()
   
   Text(
