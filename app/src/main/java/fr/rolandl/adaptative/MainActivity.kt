@@ -24,6 +24,9 @@ import fr.rolandl.adaptative.ui.theme.POCAdaptativeTheme
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
   @OptIn(ExperimentalMaterial3AdaptiveApi::class)
+  private lateinit var navigator: ThreePaneScaffoldNavigator<Int>
+
+  @OptIn(ExperimentalMaterial3AdaptiveApi::class)
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     
@@ -32,7 +35,7 @@ class MainActivity : ComponentActivity() {
     val deeplink = intent.data
     
     setContent {
-      val navigator = rememberListDetailPaneScaffoldNavigator<Int>()
+      navigator = rememberListDetailPaneScaffoldNavigator<Int>()
       
       BackHandler(navigator.canNavigateBack()) {
         navigator.navigateBack()
@@ -44,6 +47,15 @@ class MainActivity : ComponentActivity() {
           deeplink = deeplink
         )
       }
+    }
+  }
+
+  @OptIn(ExperimentalMaterial3AdaptiveApi::class)
+  override fun onNewIntent(intent: Intent) {
+    super.onNewIntent(intent)
+
+    intent.data?.lastPathSegment?.toIntOrNull()?.let {
+      navigator.navigateTo(ListDetailPaneScaffoldRole.Detail, it)
     }
   }
 }
